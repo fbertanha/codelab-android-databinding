@@ -62,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            app:popularidadeIcone="@{viewmodel.popularity}"
             android:contentDescription="@string/profile_avatar_cd"
             android:minWidth="48dp"
             android:minHeight="48dp"

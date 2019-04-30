@@ -33,6 +33,40 @@ import com.example.android.databinding.basicsample.data.Popularity
  * A Binding Adapter that is called whenever the value of the attribute `app:popularityIcon`
  * changes. Receives a popularity level that determines the icon and tint color to use.
  */
+
+@BindingAdapter("app:popularidadeIcone")
+fun popularidadeIcone(view: ImageView, popularity: Popularity) {
+    val iconeCor = getIconeCor(popularity, view.context)
+    ImageViewCompat.setImageTintList(view, ColorStateList.valueOf(iconeCor))
+
+    view.setImageDrawable(getIconeDrawable(popularity, view.context))
+}
+
+fun getIconeCor(popularity: Popularity, context: Context): Int {
+    return when (popularity) {
+        Popularity.NORMAL -> context.theme.obtainStyledAttributes(
+                intArrayOf(android.R.attr.colorForeground)
+        ).getColor(0, 0x000000)
+        Popularity.POPULAR -> ContextCompat.getColor(context, R.color.popular)
+        Popularity.STAR -> ContextCompat.getColor(context, R.color.star)
+    }
+}
+
+fun getIconeDrawable(popularity: Popularity, context: Context): Drawable? {
+    return when (popularity) {
+        Popularity.NORMAL -> {
+            ContextCompat.getDrawable(context, R.drawable.ic_person_black_96dp)
+        }
+        Popularity.POPULAR -> {
+            ContextCompat.getDrawable(context, R.drawable.ic_whatshot_black_96dp)
+        }
+        Popularity.STAR -> {
+            ContextCompat.getDrawable(context, R.drawable.ic_whatshot_black_96dp)
+        }
+    }
+}
+
+
 @BindingAdapter("app:popularityIcon")
 fun popularityIcon(view: ImageView, popularity: Popularity) {
 
